@@ -272,7 +272,6 @@ setup(
     os.path.join('bin','ligolw_dq_grapher'),
     os.path.join('bin','ligolw_publish_dqxml'),
     os.path.join('bin','ligolw_diff'),
-    os.path.join('bin', 'glue_nmi_genbuild'),
     os.path.join('bin', 'ligolw_print_tables'),
     os.path.join('bin', 'ligolw_veto_def_check'),
     os.path.join('bin', 'gw_data_find')],
