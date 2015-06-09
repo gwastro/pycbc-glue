@@ -4,10 +4,6 @@ include glue/ligolw/*.h
 include misc/*.py
 include src/segments/*.c
 include src/segments/*.h
-include src/nmi/*
-include src/nmi/builds/*
-include src/nmi/unit/*
-include src/nmi/diff/*
 include etc/*
 include test/*
 include debian/*

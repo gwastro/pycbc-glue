@@ -211,7 +211,7 @@ setup(
   description = "Grid LSC User Engine",
   url = "http://www.lsc-group.phys.uwm.edu/daswg/",
   license = 'See file LICENSE',
-  packages = [ 'glue', 'glue.ligolw', 'glue.ligolw.utils', 'glue.segmentdb', 'glue.nmi', 'glue.auth'],
+  packages = [ 'glue', 'glue.ligolw', 'glue.ligolw.utils', 'glue.segmentdb', 'glue.auth'],
   cmdclass = {
     'build_py' : glue_build_py,
     'install' : glue_install,
@@ -285,12 +285,6 @@ setup(
         os.path.join('etc','glue-user-env.csh'),
         os.path.join('etc','ligolw.xsl'),
         os.path.join('etc','ligolw.js') ]
-    ),
-    ( os.path.join( 'share','nmi' ),
-      [ 
-        os.path.join('src', 'nmi', 'builds', 'lalsuite-build.spec'),
-        os.path.join('src', 'nmi', 'builds', 'lalsuite-build-scripts.location'),
-      ]
     )
   ]
 )
