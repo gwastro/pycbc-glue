@@ -263,14 +263,13 @@ setup(
     os.path.join('bin','ligolw_diff'),
     ],
   data_files = [
-    ( 'etc',
-      [ os.path.join('etc','ldg-sites.xml'),
-        os.path.join('etc','cbcwebpage.css'),
-        os.path.join('etc','pegasus-properties.bundle'),
+    ( 'etc', [ 
         os.path.join('etc','glue-user-env.sh'),
         os.path.join('etc','glue-user-env.csh'),
         os.path.join('etc','ligolw.xsl'),
-        os.path.join('etc','ligolw.js') ]
+        os.path.join('etc','ligolw.js'),
+        os.path.join('etc','ligolw_dtd.txt') 
+      ]
     )
   ]
 )
