@@ -269,9 +269,52 @@ setup(
     ( 'etc', [ 
         os.path.join('etc','glue-user-env.sh'),
         os.path.join('etc','glue-user-env.csh'),
+        os.path.join('etc','ldbdserver.ini'),
+        os.path.join('etc','ldbduser.ini'),
         os.path.join('etc','ligolw.xsl'),
         os.path.join('etc','ligolw.js'),
         os.path.join('etc','ligolw_dtd.txt') 
+      ]
+    ),
+    ( os.path.join( 'etc', 'httpd', 'conf.d' ),
+      [
+        os.path.join('etc', 'segdb.conf')
+      ]
+    ),
+    ( os.path.join( 'var', 'php', 'seginsert' ),
+      [
+        os.path.join('src', 'php', 'seginsert','index.php'),
+        os.path.join('src', 'php', 'seginsert','flagcheck.php'),
+        os.path.join('src', 'php', 'seginsert','ligolw.xsl'),
+        os.path.join('src', 'php', 'seginsert','listflags.php'),
+        os.path.join('src', 'php', 'seginsert','submitflag.php')
+      ]
+    ),
+    ( os.path.join( 'var', 'php', 'seginsert', 'img' ),
+      [
+        os.path.join('src', 'php', 'seginsert','img','LIGOLogo.gif'),
+        os.path.join('src', 'php', 'seginsert','img','brace.gif'),
+        os.path.join('src', 'php', 'seginsert','img','lsc.gif'),
+        os.path.join('src', 'php', 'seginsert','img','plus.gif')
+      ]
+    ),
+    ( os.path.join( 'var', 'php', 'seginsert', 'scripts' ),
+      [
+        os.path.join('src', 'php', 'seginsert','scripts','footer.php'),
+        os.path.join('src', 'php', 'seginsert','scripts','form_day_list.php'),
+        os.path.join('src', 'php', 'seginsert','scripts','form_month_list.php'),
+        os.path.join('src', 'php', 'seginsert','scripts','form_year_list.php'),
+        os.path.join('src', 'php', 'seginsert','scripts','header.php'),
+        os.path.join('src', 'php', 'seginsert','scripts','style.css'),
+        os.path.join('src', 'php', 'seginsert','scripts','styletitle.php'),
+        os.path.join('src', 'php', 'seginsert','scripts','time_conv_functions.php')
+      ]
+    ),
+    ( os.path.join( 'var', 'php', 'dq_report' ),
+      [
+        os.path.join('src', 'php', 'dq_report','index.php'),
+        os.path.join('src', 'php', 'dq_report','get_report.php'),
+        os.path.join('src', 'php', 'dq_report','header.php')
       ]
     )
   ]

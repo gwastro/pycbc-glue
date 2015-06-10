@@ -126,25 +126,25 @@ def setup_database(database_location):
     identity = "/DC=org/DC=doegrids/OU=Services/CN=ldbd/"
 
     if protocol.startswith('http'):
-      from glue import LDBDWClient
       if protocol == "https":
          identity += host
       else:
          identity = None
       try:
+        from glue import LDBDWClient
         client = LDBDWClient.LDBDClient(host,port,protocol,identity)
       except Exception, e:
         print >>sys.stderr, "Unable to connect to LDBD Server at %s://%s:%d " % (protocol,host, port) + str(e)
         sys.exit(1)
 
     elif protocol.startswith('ldbd'):
-      from glue import LDBDClient
       if protocol == "ldbd":
          identity += host
          from glue import gsiserverutils
       else:
          identity = None
       try:
+        from glue import LDBDClient
         client = LDBDClient.LDBDClient(host,port,identity)
       except Exception, e:
         print >>sys.stderr, "Unable to connect to LDBD Server at %s://%s:%d" % (protocol,host, port) + str(e)
