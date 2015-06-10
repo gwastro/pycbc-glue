@@ -1,7 +1,7 @@
 # 
 # setup script for glue
 
-import os, sys
+import os, sys, shutil
 import subprocess
 import time
 
@@ -170,7 +170,7 @@ class glue_install(install.install):
 class glue_clean(clean.clean):
   def finalize_options (self):
     clean.clean.finalize_options(self)
-    self.clean_files = [ 'misc/__init__.pyc', 'misc/generate_vcs_info.pyc' ]
+    self.clean_files = [ 'glue.egg-info', 'misc/__init__.pyc', 'misc/generate_vcs_info.pyc' ]
 
   def run(self):
     clean.clean.run(self)
@@ -179,7 +179,10 @@ class glue_clean(clean.clean):
       try:
         os.unlink(f)
       except:
-        log.warn("'%s' does not exist -- can't clean it" % f)
+        try:
+          shutil.rmtree(f)
+        except:
+          log.warn("'%s' does not exist -- can't clean it" % f)
 
 class glue_sdist(sdist.sdist):
   def run(self):
