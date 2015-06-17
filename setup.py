@@ -29,185 +29,94 @@ except ImportError as e:
     from distutils.command import install
 else:
     from setuptools.command import install
+    
 from distutils.core import Extension
 from distutils.command import build_py
+from distutils.errors import DistutilsError
 from distutils.command import sdist
 from distutils.command import clean
+from distutils.file_util import write_file
 from distutils import log
 
 from misc import generate_vcs_info as gvcsi
 
-ver = "1.48"
+class glue_install(install.install):
+    def run(self):
+        etcdirectory = os.path.join(self.install_data, 'etc')
+        if not os.path.exists(etcdirectory):
+            os.makedirs(etcdirectory)
 
-def remove_root(path,root):
-  if root:
-    return os.path.normpath(path).replace(os.path.normpath(root),"")
-  else:
-    return os.path.normpath(path)
+        filename = os.path.join(etcdirectory, 'glue-user-env.sh')
+        self.execute(write_file,
+                     (filename, [self.extra_dirs]),
+                     "creating %s" % filename)
+
+        env_file = open(filename, 'w')
+        print >> env_file, "PATH=" + self.install_scripts + ":$PATH"
+        print >> env_file, "PYTHONPATH=" + self.install_libbase + ":$PYTHONPATH"
+        print >> env_file, "export PYTHONPATH"
+        print >> env_file, "export PATH"
+        env_file.close()
+
+        try:
+            install.install.do_egg_install(self)
+        except DistutilsError as err:
+            print err
+        else:
+            install.install.run(self)
 
 def write_build_info():
-  """
-  Get VCS info from misc/generate_vcs_info.py and add build information.
-  Substitute these into misc/git_version.py.in to produce glue/git_version.py.
-  """
-  vcs_info = gvcsi.generate_git_version_info()
-
-  # determine current time and treat it as the build time
-  build_date = time.strftime('%Y-%m-%d %H:%M:%S +0000', time.gmtime())
-
-  # determine builder
-  retcode, builder_name = gvcsi.call_out(('git', 'config', 'user.name'))
-  if retcode:
-    builder_name = "Unknown User"
-  retcode, builder_email = gvcsi.call_out(('git', 'config', 'user.email'))
-  if retcode:
-    builder_email = ""
-  builder = "%s <%s>" % (builder_name, builder_email)
-
-  sed_cmd = ('sed',
-             '-e', 's/@ID@/%s/' % vcs_info.id,
-             '-e', 's/@DATE@/%s/' % vcs_info.date,
-             '-e', 's/@BRANCH@/%s/' % vcs_info.branch,
-             '-e', 's/@TAG@/%s/' % vcs_info.tag,
-             '-e', 's/@AUTHOR@/%s/' % vcs_info.author,
-             '-e', 's/@COMMITTER@/%s/' % vcs_info.committer,
-             '-e', 's/@STATUS@/%s/' % vcs_info.status,
-             '-e', 's/@BUILDER@/%s/' % builder,
-             '-e', 's/@BUILD_DATE@/%s/' % build_date,
-             'misc/git_version.py.in')
-
-  # FIXME: subprocess.check_call becomes available in Python 2.5
-  sed_retcode = subprocess.call(sed_cmd,
-    stdout=open('glue/git_version.py', 'w'))
-  if sed_retcode:
-    raise gvcsi.GitInvocationError
-
-class glue_build_py(build_py.build_py):
-  def run(self):
-    # create the git_version module
-    log.info("Generating glue/git_version.py")
-    try:
-      write_build_info()
-    except gvcsi.GitInvocationError:
-      if os.path.exists("glue/git_version.py"):
-        # We're probably being built from a release tarball; don't overwrite
-        log.info("Not in git checkout or cannot find git executable; "\
-            "using existing glue/git_version.py")
-      else:
-        log.error("Not in git checkout or cannot find git executable "\
-            "and no glue/git_version.py. Exiting.")
-        sys.exit(1)
-
-    # resume normal build procedure
-    build_py.build_py.run(self)
-
-class glue_install(install.install):
-  def run(self):
-
-    # create the user env scripts
-    if self.install_purelib == self.install_platlib:
-      glue_pythonpath = self.install_purelib
-    else:
-      glue_pythonpath = self.install_platlib + ":" + self.install_purelib
-
-    glue_prefix = remove_root(self.install_platbase,self.root)
-    glue_install_scripts = remove_root(self.install_scripts,self.root)
-    glue_pythonpath = remove_root(glue_pythonpath,self.root)
-    glue_install_platlib = remove_root(self.install_platlib,self.root)
+    """
+    Get VCS info from glue/generate_vcs_info.py and add build information.
+    Substitute these into glue/git_version.py.in to produce
+    glue/git_version.py.
+    """
+    date = branch = tag = author = committer = status = builder_name = build_date = ""
+    id = "0.9.0"
     
-    log.info("creating glue-user-env.sh script")
-    shenv = os.path.join('etc','glue-user-env.sh')
-    env_file = open(shenv, 'w')
-    env_file.write("# Source this file to access GLUE\n")
-    env_file.write("GLUE_PREFIX=%s\n" % glue_prefix)
-    env_file.write("export GLUE_PREFIX\n")
-    env_file.write("PATH=" + glue_install_scripts + ":${PATH}\n")
-    env_file.write("PYTHONPATH=" + glue_pythonpath + ":${PYTHONPATH}\n")
-    env_file.write("LD_LIBRARY_PATH=" + glue_install_platlib + ":${LD_LIBRARY_PATH}\n")
-    env_file.write("DYLD_LIBRARY_PATH=" + glue_install_platlib + ":${DYLD_LIBRARY_PATH}\n")
-    env_file.write("export PATH PYTHONPATH LD_LIBRARY_PATH DYLD_LIBRARY_PATH\n")
-    env_file.close()
+    try:
+        v = gvcsi.generate_git_version_info()
+        id, date, branch, tag, author = v.id, v.date, b.branch, v.tag, v.author
+        committer, status = v.committer, v.status
 
-    log.info("creating glue-user-env.csh script")
-    cshenv = os.path.join('etc','glue-user-env.csh')
-    env_file = open(cshenv, 'w')
-    env_file.write("# Source this file to access GLUE\n")
-    env_file.write("setenv GLUE_PREFIX %s\n" % glue_prefix)
-    env_file.write("setenv PATH %s:${PATH}\n" % glue_install_scripts)
-    env_file.write("if ( $?PYTHONPATH ) then\n")
-    env_file.write("  setenv PYTHONPATH %s:${PYTHONPATH}\n" % glue_pythonpath)
-    env_file.write("else\n")
-    env_file.write("  setenv PYTHONPATH %s\n" % glue_pythonpath)
-    env_file.write("endif\n")
-    env_file.write("if ( $?LD_LIBRARY_PATH ) then\n")
-    env_file.write("  setenv LD_LIBRARY_PATH %s:${LD_LIBRARY_PATH}\n"
-                   % glue_install_platlib)
-    env_file.write("else\n")
-    env_file.write("  setenv LD_LIBRARY_PATH %s\n" % glue_install_platlib)
-    env_file.write("endif\n")
-    env_file.write("if ( $?DYLD_LIBRARY_PATH ) then\n")
-    env_file.write("  setenv DYLD_LIBRARY_PATH %s:${DYLD_LIBRARY_PATH}"
-                   % glue_install_platlib)
-    env_file.write("else\n")
-    env_file.write("  setenv DYLD_LIBRARY_PATH %s\n" % glue_install_platlib)
-    env_file.write("endif\n")
-    env_file.close()
+        # determine current time and treat it as the build time
+        build_date = time.strftime('%Y-%m-%d %H:%M:%S +0000', time.gmtime())
 
-    # now run the installer
-    install.install.run(self)
-
-    # announce the environment script
-    print("\n" + '-' * 79)
-    print("GLUE has been installed.")
-    print("If you are running csh, you can set your environment by "
-          "running:\n")
-    print("source %s\n" % os.path.join(self.install_base, cshenv))
-    print("Otherwise, you can run:\n")
-    print("source %s" % os.path.join(self.install_base, shenv))
-    print("\n" + '-' * 79)
-
-
-class glue_clean(clean.clean):
-  def finalize_options (self):
-    clean.clean.finalize_options(self)
-    self.clean_files = [ 'glue.egg-info', 'misc/__init__.pyc', 'misc/generate_vcs_info.pyc' ]
-
-  def run(self):
-    clean.clean.run(self)
-    for f in self.clean_files:
-      self.announce('removing ' + f)
-      try:
-        os.unlink(f)
-      except:
-        try:
-          shutil.rmtree(f)
-        except:
-          log.warn("'%s' does not exist -- can't clean it" % f)
-
-class glue_sdist(sdist.sdist):
-  def run(self):
-    # remove the automatically generated user env scripts
-    for script in [ 'glue-user-env.sh', 'glue-user-env.csh' ]:
-      log.info( 'removing ' + script )
-      try:
-        os.unlink(os.path.join('etc',script))
-      except:
+        # determine builder
+        retcode, builder_name = gvcsi.call_out(('git', 'config', 'user.name'))
+        if retcode:
+            builder_name = "Unknown User"
+        retcode, builder_email = gvcsi.call_out(('git', 'config', 'user.email'))
+        if retcode:
+            builder_email = ""
+        builder = "%s <%s>" % (builder_name, builder_email)
+    except:
         pass
 
-    # create the git_version module
-    log.info("Generating glue/git_version.py")
-    try:
-      write_build_info()
-    except gvcsi.GitInvocationError:
-      log.error("Not in git checkout or cannot find git executable and no "\
-        "glue/git_version.py. Exiting.")
-      sys.exit(1)
+    sed_cmd = ('sed',
+        '-e', 's/@ID@/%s/' % id,
+        '-e', 's/@DATE@/%s/' % date,
+        '-e', 's/@BRANCH@/%s/' % branch,
+        '-e', 's/@TAG@/%s/' % tag,
+        '-e', 's/@AUTHOR@/%s/' % author,
+        '-e', 's/@COMMITTER@/%s/' % committer,
+        '-e', 's/@STATUS@/%s/' % status,
+        '-e', 's/@BUILDER@/%s/' % builder_name,
+        '-e', 's/@BUILD_DATE@/%s/' % build_date,
+        'misc/git_version.py.in')
 
-    # now run sdist
-    sdist.sdist.run(self)
+    # FIXME: subprocess.check_call becomes available in Python 2.5
+    sed_retcode = subprocess.call(sed_cmd,
+        stdout=open('glue/git_version.py', 'w'))
+    if sed_retcode:
+        raise gvcsi.GitInvocationError
+    return id
+
+ver = write_build_info()
+
 
 setup(
-  name = "glue",
+  name = "pycbc-glue",
   version = ver,
   author = "Duncan Brown",
   author_email = "dbrown@ligo.caltech.edu",
@@ -215,12 +124,7 @@ setup(
   url = "http://www.lsc-group.phys.uwm.edu/daswg/",
   license = 'See file LICENSE',
   packages = [ 'glue', 'glue.ligolw', 'glue.ligolw.utils', 'glue.segmentdb', 'glue.auth'],
-  cmdclass = {
-    'build_py' : glue_build_py,
-    'install' : glue_install,
-    'clean' : glue_clean,
-    'sdist' : glue_sdist
-  },
+  cmdclass = {'install' : glue_install,},
   ext_modules = [
     Extension(
       "glue.ligolw.tokenizer",
