@@ -1,7 +1,7 @@
 include LICENSE README MANIFEST.in
 include glue/ligolw/*.c
 include glue/ligolw/*.h
-include misc/*.py
+include misc/*
 include src/segments/*.c
 include src/segments/*.h
 include etc/*
