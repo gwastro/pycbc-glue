@@ -72,7 +72,7 @@ def write_build_info():
     glue/git_version.py.
     """
     date = branch = tag = author = committer = status = builder_name = build_date = ""
-    id = "1.0.dev0"
+    id = "0.9.1"
     
     try:
         v = gvcsi.generate_git_version_info()
