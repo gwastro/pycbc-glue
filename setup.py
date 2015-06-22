@@ -20,6 +20,7 @@ if version_info < (2, 6):
 
 try:
     from setuptools import setup
+    from setuptools.command import install
 except ImportError as e:
     if os.path.basename(os.path.dirname(__file__)).startswith('pip-'):
         e.args = ('setuptools module not found, cannot proceed with pip '
@@ -27,8 +28,6 @@ except ImportError as e:
         raise
     from distutils.core import setup
     from distutils.command import install
-else:
-    from setuptools.command import install
     
 from distutils.core import Extension
 from distutils.command import build_py
@@ -58,12 +57,12 @@ class glue_install(install.install):
         print >> env_file, "export PATH"
         env_file.close()
 
-        try:
-            install.install.do_egg_install(self)
-        except DistutilsError as err:
-            print err
-        else:
-            install.install.run(self)
+        #try:
+        #    install.install.do_egg_install(self)
+        #except DistutilsError as err:
+        #    print err
+        #else:
+        install.install.run(self)
 
 def write_build_info():
     """
