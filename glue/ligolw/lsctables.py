@@ -2047,7 +2047,12 @@ class SnglInspiral(object):
 		return LIGOTimeGPS(self.end_time, self.end_time_ns)
 
 	def set_end(self, gps):
-		self.end_time, self.end_time_ns = gps.seconds, gps.nanoseconds
+		# FIXME:  remove try/except when we can be certain
+		# we're using the swig version
+		try:
+			self.end_time, self.end_time_ns = gps.gpsSeconds, gps.gpsNanoSeconds
+		except AttributeError:
+			self.end_time, self.end_time_ns = gps.seconds, gps.nanoseconds
 
 	def get_reduced_chisq(self):
 		return float(self.chisq)/ (2*self.chisq_dof - 2)
@@ -2291,7 +2296,12 @@ class SnglRingdown(object):
 		return LIGOTimeGPS(self.start_time, self.start_time_ns)
 
 	def set_start(self, gps):
-		self.start_time, self.start_time_ns = gps.seconds, gps.nanoseconds
+		# FIXME:  remove try/except when we can be certain
+		# we're using the swig version
+		try:
+			self.start_time, self.start_time_ns = gps.gpsSeconds, gps.gpsNanoSeconds
+		except AttributeError:
+			self.start_time, self.start_time_ns = gps.seconds, gps.nanoseconds
 
 	def get_id_parts(self):
 		"""
@@ -2351,7 +2361,12 @@ class CoincRingdown(object):
 		return LIGOTimeGPS(self.start_time, self.start_time_ns)
 
 	def set_start(self, gps):
-		self.start_time, self.start_time_ns = gps.seconds, gps.nanoseconds
+		# FIXME:  remove try/except when we can be certain
+		# we're using the swig version
+		try:
+			self.start_time, self.start_time_ns = gps.gpsSeconds, gps.gpsNanoSeconds
+		except AttributeError:
+			self.start_time, self.start_time_ns = gps.seconds, gps.nanoseconds
 
 	def set_ifos(self, ifos):
 		self.ifos = ifos_from_instrument_set(ifos)
