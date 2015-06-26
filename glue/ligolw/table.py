@@ -112,8 +112,6 @@ def StripColumnName(name):
 	>>> StripColumnName("program")
 	'program'
 	"""
-	if name.lower() != name:
-		warnings.warn("column name \"%s\" is not lower case" % name)
 	try:
 		return ColumnPattern.search(name).group("Name")
 	except AttributeError:
