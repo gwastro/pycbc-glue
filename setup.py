@@ -71,7 +71,7 @@ def write_build_info():
     glue/git_version.py.
     """
     date = branch = tag = author = committer = status = builder_name = build_date = ""
-    id = "1.0.dev0"
+    id = "0.9.6"
     
     try:
         v = gvcsi.generate_git_version_info()
@@ -118,9 +118,10 @@ setup(
   name = "pycbc-glue",
   version = ver,
   author = "Duncan Brown",
-  author_email = "dbrown@ligo.caltech.edu",
+  author_email = "duncan.brown@ligo.org",
   description = "Grid LSC User Engine",
-  url = "http://www.lsc-group.phys.uwm.edu/daswg/",
+  url = "https://github.com/ligo-cbc/pycbc-glue",
+  download_url = "https://github.com/ligo-cbc/pycbc-glue/archive/v0.9.6.tar.gz",
   license = 'See file LICENSE',
   packages = [ 'glue', 'glue.ligolw', 'glue.ligolw.utils', 'glue.segmentdb', 'glue.auth'],
   cmdclass = {'install' : glue_install,},
