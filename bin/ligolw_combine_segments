@@ -90,6 +90,7 @@ if __name__ == '__main__':
                              contenthandler=ContentHandler)
         segs = segments.LigolwSegments(indoc)
         for seglist in segs:
+            seglist.coalesce()
             # valid should be the intersection of the valid portion
             # in all files
             if valid is None:
@@ -99,6 +100,7 @@ if __name__ == '__main__':
             
             # the union of the valid segments in all files
             segment_list += seglist.active   
+            segment_list.coalesce()            
             ifos.update(seglist.instruments)
             segment_list, seglist.active
 
@@ -141,6 +143,7 @@ if __name__ == '__main__':
     base_row.segment_def_cdb = 0 
     base_row.process_id = proc_id  
     base_row.segment_def_id = def_row.segment_def_id
+    segment_list.coalesce()
     for seg in segment_list:
         row = copy.copy(base_row)
         row.set(seg)
