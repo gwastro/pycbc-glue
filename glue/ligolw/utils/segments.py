@@ -309,7 +309,7 @@ class LigolwSegments(set):
 		self.add(LigolwSegmentList(active = segmentsUtils.fromsegwizard(fileobj, coltype = LIGOTimeGPS), instruments = instruments, name = name, version = version, comment = comment))
 
 
-	def insert_from_segmentlistdict(self, seglists, name, version = None, comment = None):
+	def insert_from_segmentlistdict(self, seglists, name, version = None, comment = None, valid=None):
 		"""
 		Insert the segments from the segmentlistdict object
 		seglists as a new list of "active" segments into this
@@ -320,7 +320,11 @@ class LigolwSegments(set):
 		comment will be used to populate the entry's metadata.
 		"""
 		for instrument, segments in seglists.items():
-			self.add(LigolwSegmentList(active = segments, instruments = set([instrument]), name = name, version = version, comment = comment))
+			if valid is None:
+				curr_valid = ()
+			else:
+				curr_valid = valid[instrument]		
+			self.add(LigolwSegmentList(active = segments, instruments = set([instrument]), name = name, version = version, comment = comment, valid = curr_valid))
 
 
 	def coalesce(self):
@@ -442,7 +446,7 @@ class LigolwSegments(set):
 				row.process_id = process_id
 				row.segment_def_id = segment_def_id
 				setattr(row, id_column, target_table.get_next_id())
-				if hasattr(row, "comment"):
+				if 'comment' in target_table.validcolumns:
 					row.comment = None
 				yield row, target_table
 
