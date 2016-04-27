@@ -1346,7 +1346,6 @@ static struct PyMethodDef methods[] = {
 
 PyTypeObject segments_SegmentList_Type = {
 	PyObject_HEAD_INIT(NULL)
-	.tp_base = &PyList_Type,
 	.tp_as_number = &as_number,
 	.tp_as_sequence = &as_sequence,
 	.tp_doc =
