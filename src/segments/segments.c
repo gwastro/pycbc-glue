@@ -74,6 +74,7 @@ void init__segments(void)
 	 * unhappy with that.
 	 */
 
+	segments_Segment_Type.tp_base = &PyTuple_Type;
 	if(!segments_Segment_Type.tp_hash)
 		segments_Segment_Type.tp_hash = PyTuple_Type.tp_hash;
 	if(PyType_Ready(&segments_Segment_Type) < 0)
@@ -87,6 +88,7 @@ void init__segments(void)
 	 * Create segmentlist class
 	 */
 
+	segments_SegmentList_Type.tp_base = &PyList_Type;
 	if(PyType_Ready(&segments_SegmentList_Type) < 0)
 		return;
 	Py_INCREF(&segments_SegmentList_Type);
