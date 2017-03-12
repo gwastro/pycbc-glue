@@ -35,10 +35,10 @@ from optparse import OptionParser
 import sys
 
 
-from pycbc-glue import git_version
-from pycbc-glue.ligolw import ligolw
-from pycbc-glue.ligolw import table
-from pycbc-glue.ligolw import utils
+from pycbc_glue import git_version
+from pycbc_glue.ligolw import ligolw
+from pycbc_glue.ligolw import table
+from pycbc_glue.ligolw import utils
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"

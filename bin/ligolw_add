@@ -36,13 +36,13 @@ import os
 import sys
 
 
-from pycbc-glue import git_version
-from pycbc-glue.lal import CacheEntry
-from pycbc-glue.ligolw import ligolw
-from pycbc-glue.ligolw import array as ligolw_array
-from pycbc-glue.ligolw import lsctables
-from pycbc-glue.ligolw import utils as ligolw_utils
-from pycbc-glue.ligolw.utils import ligolw_add
+from pycbc_glue import git_version
+from pycbc_glue.lal import CacheEntry
+from pycbc_glue.ligolw import ligolw
+from pycbc_glue.ligolw import array as ligolw_array
+from pycbc_glue.ligolw import lsctables
+from pycbc_glue.ligolw import utils as ligolw_utils
+from pycbc_glue.ligolw.utils import ligolw_add
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"

@@ -1,6 +1,6 @@
 include LICENSE README MANIFEST.in
-include pycbc-glue/ligolw/*.c
-include pycbc-glue/ligolw/*.h
+include pycbc_glue/ligolw/*.c
+include pycbc_glue/ligolw/*.h
 include misc/*
 include src/segments/*.c
 include src/segments/*.h

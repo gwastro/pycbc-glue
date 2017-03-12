@@ -40,19 +40,19 @@ import sys
 import os
 import pwd
 
-from pycbc-glue.ligolw import utils
-from pycbc-glue.ligolw import ligolw
-from pycbc-glue.ligolw import lsctables
+from pycbc_glue.ligolw import utils
+from pycbc_glue.ligolw import ligolw
+from pycbc_glue.ligolw import lsctables
 
-from pycbc-glue.segmentdb import logic 
+from pycbc_glue.segmentdb import logic 
 
-from pycbc-glue.ligolw.utils import process
+from pycbc_glue.ligolw.utils import process
 
-from pycbc-glue.segmentdb.segmentdb_utils import add_to_segment_definer
-from pycbc-glue.segmentdb.segmentdb_utils import add_to_segment
-from pycbc-glue.segmentdb.segmentdb_utils import find_segments
+from pycbc_glue.segmentdb.segmentdb_utils import add_to_segment_definer
+from pycbc_glue.segmentdb.segmentdb_utils import add_to_segment
+from pycbc_glue.segmentdb.segmentdb_utils import find_segments
 
-from pycbc-glue import git_version
+from pycbc_glue import git_version
 
 PROGRAM_NAME = sys.argv[0].replace('./','')
 PROGRAM_PID  = os.getpid()

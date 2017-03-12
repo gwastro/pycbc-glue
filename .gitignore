@@ -2,6 +2,6 @@
 MANIFEST
 build
 dist
-etc/pycbc-glue-user-env.*sh
-pycbc-glue/git_version.py
+etc/pycbc_glue-user-env.*sh
+pycbc_glue/git_version.py
 src/conf/s6_db2/*.sql

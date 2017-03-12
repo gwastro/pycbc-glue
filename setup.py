@@ -1,5 +1,5 @@
 # 
-# setup script for pycbc-glue
+# setup script for pycbc_glue
 
 import os, sys, shutil
 import subprocess
@@ -45,7 +45,7 @@ class glue_install(install.install):
         if not os.path.exists(etcdirectory):
             os.makedirs(etcdirectory)
 
-        filename = os.path.join(etcdirectory, 'pycbc-glue-user-env.sh')
+        filename = os.path.join(etcdirectory, 'pycbc_glue-user-env.sh')
         self.execute(write_file,
                      (filename, [self.extra_dirs]),
                      "creating %s" % filename)
@@ -66,9 +66,9 @@ class glue_install(install.install):
 
 def write_build_info():
     """
-    Get VCS info from pycbc-glue/generate_vcs_info.py and add build information.
-    Substitute these into pycbc-glue/git_version.py.in to produce
-    pycbc-glue/git_version.py.
+    Get VCS info from pycbc_glue/generate_vcs_info.py and add build information.
+    Substitute these into pycbc_glue/git_version.py.in to produce
+    pycbc_glue/git_version.py.
     """
     date = branch = tag = author = committer = status = builder_name = build_date = ""
     id = "1.0.dev2"
@@ -106,7 +106,7 @@ def write_build_info():
 
     # FIXME: subprocess.check_call becomes available in Python 2.5
     sed_retcode = subprocess.call(sed_cmd,
-        stdout=open('pycbc-glue/git_version.py', 'w'))
+        stdout=open('pycbc_glue/git_version.py', 'w'))
     if sed_retcode:
         raise gvcsi.GitInvocationError
     return id
@@ -123,28 +123,28 @@ setup(
   url = "https://github.com/ligo-cbc/pycbc-glue",
   download_url = "https://github.com/ligo-cbc/pycbc-glue/archive/v0.9.8.tar.gz",
   license = 'See file LICENSE',
-  packages = [ 'pycbc-glue', 'pycbc-glue.ligolw', 'pycbc-glue.ligolw.utils', 'pycbc-glue.segmentdb', 'pycbc-glue.auth'],
+  packages = [ 'pycbc_glue', 'pycbc_glue.ligolw', 'pycbc_glue.ligolw.utils', 'pycbc_glue.segmentdb', 'pycbc_glue.auth'],
   cmdclass = {'install' : glue_install,},
   ext_modules = [
     Extension(
-      "pycbc-glue.ligolw.tokenizer",
+      "pycbc_glue.ligolw.tokenizer",
       [
-        "pycbc-glue/ligolw/tokenizer.c",
-        "pycbc-glue/ligolw/tokenizer.Tokenizer.c",
-        "pycbc-glue/ligolw/tokenizer.RowBuilder.c",
-        "pycbc-glue/ligolw/tokenizer.RowDumper.c"
+        "pycbc_glue/ligolw/tokenizer.c",
+        "pycbc_glue/ligolw/tokenizer.Tokenizer.c",
+        "pycbc_glue/ligolw/tokenizer.RowBuilder.c",
+        "pycbc_glue/ligolw/tokenizer.RowDumper.c"
       ],
-      include_dirs = [ "pycbc-glue/ligolw" ]
+      include_dirs = [ "pycbc_glue/ligolw" ]
     ),
     Extension(
-      "pycbc-glue.ligolw._ilwd",
+      "pycbc_glue.ligolw._ilwd",
       [
-        "pycbc-glue/ligolw/ilwd.c"
+        "pycbc_glue/ligolw/ilwd.c"
       ],
-      include_dirs = [ "pycbc-glue/ligolw" ]
+      include_dirs = [ "pycbc_glue/ligolw" ]
     ),
     Extension(
-      "pycbc-glue.__segments",
+      "pycbc_glue.__segments",
       [
         "src/segments/segments.c",
         "src/segments/infinity.c",

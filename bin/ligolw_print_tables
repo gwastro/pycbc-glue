@@ -17,12 +17,12 @@ xml documents in specified formats -- currently wiki or html.
 import sys, os
 from optparse import OptionParser
 
-from pycbc-glue import git_version
-from pycbc-glue.ligolw import ligolw
-from pycbc-glue.ligolw import table
-from pycbc-glue.ligolw import utils
-from pycbc-glue.ligolw.utils import ligolw_add
-from pycbc-glue.ligolw.utils import print_tables
+from pycbc_glue import git_version
+from pycbc_glue.ligolw import ligolw
+from pycbc_glue.ligolw import table
+from pycbc_glue.ligolw import utils
+from pycbc_glue.ligolw.utils import ligolw_add
+from pycbc_glue.ligolw.utils import print_tables
 
 
 __prog__ = "ligolw_print_tables"
