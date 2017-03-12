@@ -155,7 +155,6 @@ setup(
     )
   ],
   scripts = [
-    os.path.join('bin','ligo_data_find'),
     os.path.join('bin','ligolw_add'),
     os.path.join('bin','ligolw_combine_segments'),
     os.path.join('bin','ligolw_cut'),
@@ -166,7 +165,6 @@ setup(
     os.path.join('bin','ligolw_segment_query'),
     os.path.join('bin','ligolw_segment_union'),
     os.path.join('bin','ligolw_segments_from_cats'),
-    os.path.join('bin','ligolw_sqlite'),
     os.path.join('bin','ligolw_diff'),
     ],
   data_files = [
