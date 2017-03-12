@@ -55,7 +55,7 @@ except AttributeError:
 			return False
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from .. import ligolw
 
 
@@ -80,7 +80,7 @@ def sort_files_by_size(filenames, verbose = False, reverse = False):
 	"""
 	Return a list of the filenames sorted in order from smallest file
 	to largest file (or largest to smallest if reverse is set to True).
-	If a filename in the list is None (used by many glue.ligolw based
+	If a filename in the list is None (used by many pycbc-glue.ligolw based
 	codes to indicate stdin), its size is treated as 0.  The filenames
 	may be any sequence, including generator expressions.
 	"""
@@ -329,7 +329,7 @@ def load_fileobj(fileobj, gz = None, xmldoc = None, contenthandler = None):
 
 	Example:
 
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> import StringIO
 	>>> f = StringIO.StringIO('<?xml version="1.0" encoding="utf-8" ?><!DOCTYPE LIGO_LW SYSTEM "http://ldas-sw.ligo.caltech.edu/doc/ligolwAPI/html/ligolw_dtd.txt"><LIGO_LW><Table Name="demo:table"><Column Name="name" Type="lstring"/><Column Name="value" Type="real8"/><Stream Name="demo:table" Type="Local" Delimiter=",">"mass",0.5,"velocity",34</Stream></Table></LIGO_LW>')
 	>>> xmldoc, digest = load_fileobj(f, contenthandler = ligolw.LIGOLWContentHandler)
@@ -338,10 +338,10 @@ def load_fileobj(fileobj, gz = None, xmldoc = None, contenthandler = None):
 
 	The contenthandler argument specifies the SAX content handler to
 	use when parsing the document.  The contenthandler is a required
-	argument.  See the glue.ligolw package documentation for typical
+	argument.  See the pycbc-glue.ligolw package documentation for typical
 	parsing scenario involving a custom content handler.  See
-	glue.ligolw.ligolw.PartialLIGOLWContentHandler and
-	glue.ligolw.ligolw.FilteringLIGOLWContentHandler for examples of
+	pycbc-glue.ligolw.ligolw.PartialLIGOLWContentHandler and
+	pycbc-glue.ligolw.ligolw.FilteringLIGOLWContentHandler for examples of
 	custom content handlers used to load subsets of documents into
 	memory.
 	"""
@@ -370,7 +370,7 @@ def load_filename(filename, verbose = False, **kwargs):
 
 	Example:
 
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> xmldoc = load_filename("demo.xml", contenthandler = ligolw.LIGOLWContentHandler, verbose = True)
 	"""
 	if verbose:
@@ -398,7 +398,7 @@ def load_url(url, verbose = False, **kwargs):
 	Example:
 
 	>>> from os import getcwd
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> xmldoc = load_url("file://localhost/%s/demo.xml" % getcwd(), contenthandler = ligolw.LIGOLWContentHandler, verbose = True)
 	"""
 	if verbose:
@@ -442,7 +442,7 @@ def write_fileobj(xmldoc, fileobj, gz = False, trap_signals = (signal.SIGTERM, s
 	Example:
 
 	>>> import sys
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> xmldoc = load_filename("demo.xml", contenthandler = ligolw.LIGOLWContentHandler)
 	>>> digest = write_fileobj(xmldoc, sys.stdout)	# doctest: +NORMALIZE_WHITESPACE
 	<?xml version='1.0' encoding='utf-8'?>

@@ -32,7 +32,7 @@ Convert tabular data in LIGO LW XML files to and from SQL databases.
 This module provides a library interface to the machinery used by the
 ligolw_sqlite command-line tool, facilitating it's re-use in other
 applications.  The real XML<-->database translation machinery is
-implemented in the glue.ligolw.dbtables module.  The code here wraps the
+implemented in the pycbc-glue.ligolw.dbtables module.  The code here wraps the
 machinery in that mdoule in functions that are closer to the command-line
 level operations provided by the ligolw_sqlite program.
 """
@@ -46,7 +46,7 @@ except ImportError:
 import sys
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from .. import ligolw
 from .. import dbtables
 from .. import utils as ligolw_utils
@@ -117,7 +117,7 @@ def insert_from_url(url, preserve_ids = False, verbose = False, contenthandler =
 	newly-inserted rows collide with row IDs already in the database,
 	and is generally only sensible when inserting a document into an
 	empty database.  If verbose is True then progress reports will be
-	printed to stderr.  See glue.ligolw.dbtables.use_in() for more
+	printed to stderr.  See pycbc-glue.ligolw.dbtables.use_in() for more
 	information about constructing a suitable content handler class.
 	"""
 	#

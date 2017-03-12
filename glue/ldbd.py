@@ -26,7 +26,7 @@ details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from glue import git_version
+from pycbc-glue import git_version
 __author__ = 'Duncan Brown <dbrown@ligo.caltech.edu>'
 __date__ = git_version.date 
 __version__ = git_version.id
@@ -42,7 +42,7 @@ try:
 except:
   pass
 
-from glue.ligolw.types import string_format_func
+from pycbc-glue.ligolw.types import string_format_func
 
 """
 create the csv parser and initialize a dialect for LIGO_LW streams

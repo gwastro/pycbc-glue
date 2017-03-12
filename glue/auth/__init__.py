@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""The glue.auth module provides methods to communicate with data
+"""The pycbc-glue.auth module provides methods to communicate with data
 stored behind the LIGO.ORG authentication system
 """
 

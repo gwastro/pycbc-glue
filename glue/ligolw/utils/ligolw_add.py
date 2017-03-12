@@ -34,7 +34,7 @@ import sys
 from urlparse import urlparse
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from .. import ligolw
 from .. import table
 from .. import lsctables

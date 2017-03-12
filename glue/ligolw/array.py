@@ -49,7 +49,7 @@ from xml.sax.saxutils import escape as xmlescape
 from xml.sax.xmlreader import AttributesImpl as Attributes
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from . import ligolw
 from . import tokenizer
 from . import types as ligolwtypes
@@ -291,18 +291,18 @@ class Array(ligolw.Array):
 def use_in(ContentHandler):
 	"""
 	Modify ContentHandler, a sub-class of
-	glue.ligolw.LIGOLWContentHandler, to cause it to use the Array and
+	pycbc-glue.ligolw.LIGOLWContentHandler, to cause it to use the Array and
 	ArrayStream classes defined in this module when parsing XML
 	documents.
 
 	Example:
 
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> class MyContentHandler(ligolw.LIGOLWContentHandler):
 	...	pass
 	...
 	>>> use_in(MyContentHandler)
-	<class 'glue.ligolw.array.MyContentHandler'>
+	<class 'pycbc-glue.ligolw.array.MyContentHandler'>
 	"""
 	def startStream(self, parent, attrs, __orig_startStream = ContentHandler.startStream):
 		if parent.tagName == ligolw.Array.tagName:

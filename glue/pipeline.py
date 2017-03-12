@@ -20,7 +20,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__ = 'Duncan Brown <duncan@gravity.phys.uwm.edu>'
-from glue import git_version
+from pycbc-glue import git_version
 __date__ = git_version.date
 __version__ = git_version.id
 
@@ -35,7 +35,7 @@ import urlparse
 import stat
 import socket
 import itertools
-import glue.segments
+import pycbc-glue.segments
 try:
   # use hashlib if available, python25 and above
   from hashlib import md5
@@ -3641,7 +3641,7 @@ class LsyncCache:
       times = [ int(s) for s in times[1:-1].split(' ') ]
 
       # group the integers by two and turn those tuples into segments
-      segments = [ glue.segments.segment(a) for a in self.group(times, 2) ]
+      segments = [ pycbc-glue.segments.segment(a) for a in self.group(times, 2) ]
 
       # initialize if necessary for this site
       if not gwfDict.has_key(site):
@@ -3658,7 +3658,7 @@ class LsyncCache:
           % str(key)
         raise RuntimeError, msg
 
-      gwfDict[site][frameType][key] = glue.segments.segmentlist(segments)
+      gwfDict[site][frameType][key] = pycbc-glue.segments.segmentlist(segments)
     f.close()
 
     cache['gwf'] = gwfDict
@@ -3678,10 +3678,10 @@ class LsyncCache:
       return []
 
     # segment representing the search interval
-    search = glue.segments.segment(gpsStart, gpsEnd)
+    search = pycbc-glue.segments.segment(gpsStart, gpsEnd)
 
     # segment list representing the search interval
-    searchlist = glue.segments.segmentlist([search])
+    searchlist = pycbc-glue.segments.segmentlist([search])
 
     # dict of LFNs returned that match the metadata query
     lfnDict = {}
@@ -3704,7 +3704,7 @@ class LsyncCache:
 
           # loop through the times and create paths
           for t in times:
-            if search.intersects(glue.segments.segment(t, t + dur)):
+            if search.intersects(pycbc-glue.segments.segment(t, t + dur)):
               lfn =  "%s-%s-%d-%d.gwf" % (site, frameType, t, dur)
               lfnDict[lfn] = None
 

@@ -26,7 +26,7 @@
 """
 Utilities for working with segment databases
 """
-from glue import git_version
+from pycbc-glue import git_version
 __date__ = git_version.date
 __version__ = git_version.id
 __author__ = "Larne Pekowsky <lppekows@physics.syr.edu>"

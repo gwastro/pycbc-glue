@@ -34,15 +34,15 @@ Print things from LIGO LW XML files.  Inspired by lwtprint from LIGOTools.
 from optparse import OptionParser
 
 
-from glue import git_version
-from glue import segmentsUtils
-from glue.lal import CacheEntry
-from glue.ligolw import ligolw
-from glue.ligolw import table
-from glue.ligolw import lsctables
-from glue.ligolw import array
-from glue.ligolw import utils
-from glue import git_version
+from pycbc-glue import git_version
+from pycbc-glue import segmentsUtils
+from pycbc-glue.lal import CacheEntry
+from pycbc-glue.ligolw import ligolw
+from pycbc-glue.ligolw import table
+from pycbc-glue.ligolw import lsctables
+from pycbc-glue.ligolw import array
+from pycbc-glue.ligolw import utils
+from pycbc-glue import git_version
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"
 __version__ = "git id %s" % git_version.id

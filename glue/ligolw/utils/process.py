@@ -36,7 +36,7 @@ import StringIO
 import time
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from .. import ligolw
 from .. import lsctables
 from .. import types as ligolwtypes
@@ -47,7 +47,7 @@ try:
 except ImportError:
 	# lal is optional
 	# FIXME:  make it not optional
-	from glue import gpstime
+	from pycbc-glue import gpstime
 	_UTCToGPS = lambda utc: int(gpstime.GpsSecondsFromPyUTC(time.mktime(utc)))
 
 

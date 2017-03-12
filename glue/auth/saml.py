@@ -17,7 +17,7 @@ try:
     import kerberos
 except ImportError, e:
     msg = """\n
-The glue.auth.saml module requires the python-kerberos Python module to
+The pycbc-glue.auth.saml module requires the python-kerberos Python module to
 be installed. On both Debian and RedHat-based systems like CentOS and
 Scientific Linux the name of the package to install is 'python-kerberos'.
 """

@@ -712,7 +712,7 @@ PyTypeObject ligolw_Tokenizer_Type = {
 "\n" \
 "Example:\n" \
 "\n" \
-">>> from glue.ligolw import tokenizer\n" \
+">>> from pycbc-glue.ligolw import tokenizer\n" \
 ">>> t = tokenizer.Tokenizer(u\",\")\n" \
 ">>> t.set_types([str, int])\n" \
 ">>> list(t.append(\"a,10,b,2\"))\n" \

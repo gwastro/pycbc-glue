@@ -37,10 +37,10 @@ import numpy
 from xml import sax
 
 
-from glue import git_version
-from glue import iterutils
-from glue import offsetvector
-from glue import segments
+from pycbc-glue import git_version
+from pycbc-glue import iterutils
+from pycbc-glue import offsetvector
+from pycbc-glue import segments
 from lal import LIGOTimeGPS
 
 from . import ligolw
@@ -126,11 +126,11 @@ def New(Type, columns = None, **kwargs):
 
 def IsTableProperties(Type, tagname, attrs):
 	"""
-	obsolete.  see .CheckProperties() method of glue.ligolw.table.Table
+	obsolete.  see .CheckProperties() method of pycbc-glue.ligolw.table.Table
 	class.
 	"""
 	import warnings
-	warnings.warn("lsctables.IsTableProperties() is deprecated.  use glue.ligolw.table.Table.CheckProperties() instead", DeprecationWarning)
+	warnings.warn("lsctables.IsTableProperties() is deprecated.  use pycbc-glue.ligolw.table.Table.CheckProperties() instead", DeprecationWarning)
 	return Type.CheckProperties(tagname, attrs)
 
 
@@ -1326,20 +1326,20 @@ class SnglBurstTable(table.Table):
 
 	def get_period(self):
 		"""@returns: the period segment of each row in the table
-		@returntype: glue.segments.segmentlist
+		@returntype: pycbc-glue.segments.segmentlist
 		"""
 		return segments.segmentlist([row.get_period() for row in self])
 
 	def get_ms_period(self):
 		"""@returns: the period segment for the most significant tile
 		of each row in the table
-		@returntype: glue.segments.segmentlist
+		@returntype: pycbc-glue.segments.segmentlist
 		"""
 		return segments.segmentlist([row.get_ms_period() for row in self])
 
 	def get_band(self):
 		"""@returns: the frequency band of each row in the table
-		@returntype: glue.segments.segmentlist
+		@returntype: pycbc-glue.segments.segmentlist
 		"""
 		return segments.segmentlist([row.get_band() for row in self])
 
@@ -4510,17 +4510,17 @@ TableByName = {
 def use_in(ContentHandler):
 	"""
 	Modify ContentHandler, a sub-class of
-	glue.ligolw.LIGOLWContentHandler, to cause it to use the Table
+	pycbc-glue.ligolw.LIGOLWContentHandler, to cause it to use the Table
 	classes defined in this module when parsing XML documents.
 
 	Example:
 
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> class MyContentHandler(ligolw.LIGOLWContentHandler):
 	...	pass
 	...
 	>>> use_in(MyContentHandler)
-	<class 'glue.ligolw.lsctables.MyContentHandler'>
+	<class 'pycbc-glue.ligolw.lsctables.MyContentHandler'>
 	"""
 	ContentHandler = table.use_in(ContentHandler)
 

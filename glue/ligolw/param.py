@@ -41,7 +41,7 @@ except ImportError:
 	pass
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from . import ligolw
 from . import types as ligolwtypes
 
@@ -294,12 +294,12 @@ class Param(ligolw.Param):
 def use_in(ContentHandler):
 	"""
 	Modify ContentHandler, a sub-class of
-	glue.ligolw.LIGOLWContentHandler, to cause it to use the Param
+	pycbc-glue.ligolw.LIGOLWContentHandler, to cause it to use the Param
 	class defined in this module when parsing XML documents.
 
 	Example:
 
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> def MyContentHandler(ligolw.LIGOLWContentHandler):
 	...	pass
 	...

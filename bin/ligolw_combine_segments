@@ -22,10 +22,10 @@ segment list that represents the intersection.
 """
 import copy
 from optparse import OptionParser
-from glue.ligolw import ligolw, lsctables, utils
-from glue.segments import segmentlist
-from glue.ligolw.utils import process, segments, ligolw_add
-from glue import git_version
+from pycbc-glue.ligolw import ligolw, lsctables, utils
+from pycbc-glue.segments import segmentlist
+from pycbc-glue.ligolw.utils import process, segments, ligolw_add
+from pycbc-glue import git_version
 
 class ContentHandler(ligolw.LIGOLWContentHandler):
     pass

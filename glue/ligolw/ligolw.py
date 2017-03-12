@@ -41,7 +41,7 @@ from xml.sax.saxutils import escape as xmlescape
 from xml.sax.saxutils import unescape as xmlunescape
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from . import types as ligolwtypes
 
 
@@ -616,7 +616,7 @@ class Time(Element):
 			try:
 				from lal import LIGOTimeGPS
 			except ImportError:
-				from glue.lal import LIGOTimeGPS
+				from pycbc-glue.lal import LIGOTimeGPS
 			# FIXME:  remove cast to string when lal swig
 			# can cast from unicode
 			self.pcdata = LIGOTimeGPS(str(self.pcdata))
@@ -625,7 +625,7 @@ class Time(Element):
 		else:
 			# unsupported time type.  not impossible that
 			# calling code has overridden TimeTypes set in
-			# glue.ligolw.types;  just accept it as a string
+			# pycbc-glue.ligolw.types;  just accept it as a string
 			pass
 
 	def write(self, fileobj = sys.stdout, indent = u""):
@@ -728,7 +728,7 @@ class LIGOLWContentHandler(sax.handler.ContentHandler, object):
 	>>> xmldoc.write()
 
 	NOTE:  this example is for illustration only.  Most users will wish
-	to use the .load_*() functions in the glue.ligolw.utils subpackage
+	to use the .load_*() functions in the pycbc-glue.ligolw.utils subpackage
 	to load documents, and the .write_*() functions to write documents.
 	Those functions provide additional features such as support for
 	gzip'ed documents, MD5 hash computation, and Condor eviction
@@ -834,7 +834,7 @@ class PartialLIGOLWContentHandler(LIGOLWContentHandler):
 
 	Example:
 
-	>>> from glue.ligolw import utils
+	>>> from pycbc-glue.ligolw import utils
 	>>> def contenthandler(document):
 	...	return PartialLIGOLWContentHandler(document, lambda name, attrs: name == ligolw.Table.tagName)
 	...
@@ -877,7 +877,7 @@ class FilteringLIGOLWContentHandler(LIGOLWContentHandler):
 
 	Example:
 
-	>>> from glue.ligolw import utils
+	>>> from pycbc-glue.ligolw import utils
 	>>> def contenthandler(document):
 	...	return FilteringLIGOLWContentHandler(document, lambda name, attrs: name != ligolw.Table.tagName)
 	...

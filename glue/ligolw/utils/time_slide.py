@@ -24,8 +24,8 @@
 #
 
 
-from glue import git_version
-from glue.text_progress_bar import ProgressBar
+from pycbc-glue import git_version
+from pycbc-glue.text_progress_bar import ProgressBar
 from .. import lsctables
 
 
@@ -54,7 +54,7 @@ def get_time_slide_id(xmldoc, time_slide, create_new = None, superset_ok = False
 	'time_slide:time_slide_id:10'
 
 	This function is a wrapper around the .get_time_slide_id() method
-	of the glue.ligolw.lsctables.TimeSlideTable class.  See the
+	of the pycbc-glue.ligolw.lsctables.TimeSlideTable class.  See the
 	documentation for that class for the meaning of the create_new,
 	superset_ok and nonunique_ok keyword arguments.
 
@@ -92,11 +92,11 @@ def time_slides_vacuum(time_slides, verbose = False):
 	"""
 	Given a dictionary mapping time slide IDs to instrument-->offset
 	mappings, for example as returned by the as_dict() method of the
-	TimeSlideTable class in glue.ligolw.lsctables or by the
+	TimeSlideTable class in pycbc-glue.ligolw.lsctables or by the
 	load_time_slides() function in this module, construct and return a
 	mapping indicating time slide equivalences.  This can be used to
 	delete redundant time slides from a time slide table, and then also
-	used via the applyKeyMapping() method of glue.ligolw.table.Table
+	used via the applyKeyMapping() method of pycbc-glue.ligolw.table.Table
 	instances to update cross references (for example in the
 	coinc_event table).
 

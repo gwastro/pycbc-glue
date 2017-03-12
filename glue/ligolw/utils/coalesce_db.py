@@ -27,14 +27,14 @@ except:
   pass
 
 try:
-  from glue import gpstime
-  from glue import segments
+  from pycbc-glue import gpstime
+  from pycbc-glue import segments
 except ImportError:
-  raise ImportError("Error, unable to import modules from glue. Check that glue is correctly installed and in your PYTHONPATH.")
+  raise ImportError("Error, unable to import modules from pycbc-glue. Check that pycbc-glue is correctly installed and in your PYTHONPATH.")
 
 #================================================================================
 __author__ = "Ping Wei <piwei@physics.syr.edu>"
-from glue import git_version
+from pycbc-glue import git_version
 __date__ = git_version.date
 __version__ = git_version.id
 __src__ = "$Source$"

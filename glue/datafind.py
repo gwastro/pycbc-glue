@@ -30,7 +30,7 @@ question.
 
 A new connection can be opened as follows:
 
->>> from glue.datafind import GWDataFindHTTPConnection
+>>> from pycbc-glue.datafind import GWDataFindHTTPConnection
 >>> connection = GWDataFindHTTPConnection(host, port)
 
 and similar for the HTTPS version.
@@ -46,7 +46,7 @@ relevant connection:
 
 >>> cache = connection.find_frame_urls('L', 'L1_R', 1093564816, 1093651216)
 
-By default, the returned L{Cache<glue.lal.Cache>} object includes both C{gsiftp} and local C{file} versions of each frame, but the C{urlfile} keyword argument can be given to return only one of those:
+By default, the returned L{Cache<pycbc-glue.lal.Cache>} object includes both C{gsiftp} and local C{file} versions of each frame, but the C{urlfile} keyword argument can be given to return only one of those:
 
 >>> cache = connection.find_frame_urls('L', 'L1_R', 1093564816, 1093651216, urltype='file')
 
@@ -65,7 +65,7 @@ import re
 import unittest
 
 from cjson import decode
-from glue import (lal, git_version, segments)
+from pycbc-glue import (lal, git_version, segments)
 
 __author__ = "Duncan Macleod <duncan.macleod@ligo.org>"
 __credits__ = "Scott Koranda <scott.koranda@ligo.org>"
@@ -206,7 +206,7 @@ class GWDataFindHTTPConnection(httplib.HTTPConnection):
         Use gpsstart and gpsend to restrict the returned times to
         this semiopen interval.
 
-        @returns: L{segmentlist<glue.segments.segmentlist>}
+        @returns: L{segmentlist<pycbc-glue.segments.segmentlist>}
 
         @param site:
             single-character name of site to match
@@ -236,7 +236,7 @@ class GWDataFindHTTPConnection(httplib.HTTPConnection):
     def find_frame(self, framefile, urltype=None, on_missing="warn"):
         """Query the LDR host for a single framefile
 
-        @returns: L{Cache<glue.lal.Cache>}
+        @returns: L{Cache<pycbc-glue.lal.Cache>}
 
         @param frametype:
             name of frametype to match
@@ -297,8 +297,8 @@ class GWDataFindHTTPConnection(httplib.HTTPConnection):
         @type    urltype: L{str}
         @type on_missing: L{str}
 
-        @returns: L{Cache<glue.lal.Cache>} with one
-                  L{entry<glue.lal.CacheEntry>}
+        @returns: L{Cache<pycbc-glue.lal.Cache>} with one
+                  L{entry<pycbc-glue.lal.CacheEntry>}
 
         @raises RuntimeError: if given framefile is malformed
         @raises RuntimeError: if no frames are found and C{on_missing='error'}
@@ -352,7 +352,7 @@ class GWDataFindHTTPConnection(httplib.HTTPConnection):
         @type    urltype: L{str}
         @type    on_gaps: L{str}
 
-        @returns: L{Cache<glue.lal.Cache>}
+        @returns: L{Cache<pycbc-glue.lal.Cache>}
 
         @raises RuntimeError: if gaps are found and C{on_gaps='error'}
         """

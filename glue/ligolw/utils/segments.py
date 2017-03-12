@@ -29,12 +29,12 @@ Ask Kipp to document this!
 """
 
 
-from glue import git_version
-from glue import iterutils
-from glue import segments
-from glue import segmentsUtils
+from pycbc-glue import git_version
+from pycbc-glue import iterutils
+from pycbc-glue import segments
+from pycbc-glue import segmentsUtils
 # FIXME:  switch to swig binding
-from glue.lal import LIGOTimeGPS
+from pycbc-glue.lal import LIGOTimeGPS
 from .. import lsctables
 
 
@@ -72,7 +72,7 @@ class LigolwSegmentList(object):
 
 	Example:
 
-	>>> from glue.segments import *
+	>>> from pycbc-glue.segments import *
 	>>> segs = segmentlist([segment(0, 10), segment(20, 30)])
 	>>> validity = segmentlist([segment(0, 10), segment(25, 100)])
 	>>> x = LigolwSegmentList(active = segs, valid = validity, instruments = set(("H1",)), name = "test")
@@ -141,7 +141,7 @@ class LigolwSegmentList(object):
 class LigolwSegments(set):
 	"""
 	An interface shim between code that makes use of segments in
-	glue.segments form, and LIGO Light-Weight XML I/O code.
+	pycbc-glue.segments form, and LIGO Light-Weight XML I/O code.
 
 	This class is "attached" to an XML document object, at which time
 	it parses and extracts the segment lists from the document, and
@@ -165,12 +165,12 @@ class LigolwSegments(set):
 	Example:
 
 	>>> import sys
-	>>> from glue.segments import *
-	>>> from glue.lal import LIGOTimeGPS
-	>>> from glue.ligolw import ligolw, lsctables
+	>>> from pycbc-glue.segments import *
+	>>> from pycbc-glue.lal import LIGOTimeGPS
+	>>> from pycbc-glue.ligolw import ligolw, lsctables
 	>>> xmldoc = ligolw.Document()
 	>>> xmldoc.appendChild(ligolw.LIGO_LW())	# doctest: +ELLIPSIS
-	<glue.ligolw.ligolw.LIGO_LW object at ...>
+	<pycbc-glue.ligolw.ligolw.LIGO_LW object at ...>
 	>>> process = lsctables.Process()
 	>>> process.process_id = lsctables.ProcessTable.get_next_id()
 	>>> h1segs = segmentlist([segment(LIGOTimeGPS(0), LIGOTimeGPS(10))])

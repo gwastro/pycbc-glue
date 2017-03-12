@@ -24,8 +24,8 @@
 #
 
 
-from glue import git_version
-from glue import iterutils
+from pycbc-glue import git_version
+from pycbc-glue import iterutils
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"

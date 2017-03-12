@@ -115,7 +115,7 @@ Example:
 False
 >>> x = ilwd.ilwdchar("foo:bar:0")
 >>> type(x)
-<class 'glue.ligolw.ilwd.foo_bar_class'>
+<class 'pycbc-glue.ligolw.ilwd.foo_bar_class'>
 >>> "foo_bar_class" in ilwd.__dict__
 True
 >>> print ilwd.foo_bar_class(10)
@@ -131,7 +131,7 @@ neccessary.
 import copy_reg
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from . import _ilwd
 
 
@@ -166,7 +166,7 @@ def get_ilwdchar_class(tbl_name, col_name, namespace = globals()):
 	>>> process_id = get_ilwdchar_class("process", "process_id")
 	>>> x = process_id(10)
 	>>> str(type(x))
-	"<class 'glue.ligolw.ilwd.process_process_id_class'>"
+	"<class 'pycbc-glue.ligolw.ilwd.process_process_id_class'>"
 	>>> str(x)
 	'process:process_id:10'
 
@@ -235,9 +235,9 @@ def get_ilwdchar_class(tbl_name, col_name, namespace = globals()):
 
 class ilwdchar(object):
 	"""
-	Metaclass wrapper of glue.ligolw._ilwd.ilwdchar class.
+	Metaclass wrapper of pycbc-glue.ligolw._ilwd.ilwdchar class.
 	Instantiating this class constructs and returns an instance of a
-	subclass of glue.ligolw._ilwd.ilwdchar.
+	subclass of pycbc-glue.ligolw._ilwd.ilwdchar.
 	"""
 	def __new__(cls, s):
 		"""

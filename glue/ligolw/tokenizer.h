@@ -29,7 +29,7 @@
 #include <Python.h>
 
 
-#define MODULE_NAME "glue.ligolw.tokenizer"
+#define MODULE_NAME "pycbc-glue.ligolw.tokenizer"
 
 
 /*

@@ -38,8 +38,8 @@ import urlparse
 import warnings
 
 
-from glue import git_version
-from glue import segments
+from pycbc-glue import git_version
+from pycbc-glue import segments
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"
@@ -417,7 +417,7 @@ class CacheEntry(object):
 	The values for these columns are stored in the .observatory,
 	.description, .segment and .url attributes of instances of this
 	class, respectively.  The .segment attribute stores a
-	glue.segments.segment object describing the interval spanned by the
+	pycbc-glue.segments.segment object describing the interval spanned by the
 	file.  Any of these attributes except the URL is allowed to be
 	None.
 
@@ -443,7 +443,7 @@ class CacheEntry(object):
 
 	Example (extract segmentlist dictionary from LAL cache):
 
-	>>> from glue import segments
+	>>> from pycbc-glue import segments
 	>>> seglists = segments.segmentlistdict()
 	>>> for cacheentry in cache:
 	...	seglists |= cacheentry.segmentlistdict
@@ -451,7 +451,7 @@ class CacheEntry(object):
 
 	See also:
 
-	glue.segmentsUtils.fromlalcache()
+	pycbc-glue.segmentsUtils.fromlalcache()
 	"""
 	# How to parse a line in a LAL cache file.  Five white-space
 	# delimited columns.
@@ -468,7 +468,7 @@ class CacheEntry(object):
 		of text from a LAL cache, an optional key-word argument
 		"coltype" can be provided to set the type the start and
 		durations are parsed as.  The default is
-		glue.lal.LIGOTimeGPS.
+		pycbc-glue.lal.LIGOTimeGPS.
 
 		Example:
 
@@ -588,7 +588,7 @@ class CacheEntry(object):
 		The \"observatory\" column of the cache entry, which is
 		frequently used to store instrument names, is parsed into
 		instrument names for the dictionary keys using the same
-		rules as glue.ligolw.lsctables.instrument_set_from_ifos().
+		rules as pycbc-glue.ligolw.lsctables.instrument_set_from_ifos().
 
 		Example:
 
@@ -598,7 +598,7 @@ class CacheEntry(object):
 		"""
 		# the import has to be done here to break the cyclic
 		# dependancy
-		from glue.ligolw.lsctables import instrument_set_from_ifos
+		from pycbc-glue.ligolw.lsctables import instrument_set_from_ifos
 		instruments = instrument_set_from_ifos(self.observatory) or (None,)
 		return segments.segmentlistdict((instrument, segments.segmentlist(self.segment is not None and [self.segment] or [])) for instrument in instruments)
 

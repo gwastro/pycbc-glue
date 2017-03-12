@@ -33,20 +33,20 @@ Utility methods for doing logical operations on sets of segments
 import sys
 import os
 
-import glue.segments
+import pycbc-glue.segments
 
-from glue.ligolw import ligolw
-from glue.ligolw import table
-from glue.ligolw import lsctables
+from pycbc-glue.ligolw import ligolw
+from pycbc-glue.ligolw import table
+from pycbc-glue.ligolw import lsctables
 
-from glue.ligolw.utils import ligolw_add
+from pycbc-glue.ligolw.utils import ligolw_add
 
-from glue.segmentdb.segmentdb_utils import add_to_segment_definer
-from glue.segmentdb.segmentdb_utils import add_to_segment
-from glue.segmentdb.segmentdb_utils import add_to_segment_summary
-from glue.segmentdb.segmentdb_utils import find_segments
+from pycbc-glue.segmentdb.segmentdb_utils import add_to_segment_definer
+from pycbc-glue.segmentdb.segmentdb_utils import add_to_segment
+from pycbc-glue.segmentdb.segmentdb_utils import add_to_segment_summary
+from pycbc-glue.segmentdb.segmentdb_utils import find_segments
 
-from glue import git_version
+from pycbc-glue import git_version
 __date__ = git_version.date
 __version__ = git_version.id
 __author__  = "Larne Pekowsky <lppekows@physics.syr.edu>"
@@ -94,11 +94,11 @@ def run_file_operation(outdoc, filenames, use_segment_table, operation, preserve
         if operation == INTERSECT:
             # If I were feeling especially functional-ist I'd write this
             # with reduce()
-            result = glue.segments.segmentlist([glue.segments.segment(-glue.segments.infinity(), glue.segments.infinity())])
+            result = pycbc-glue.segments.segmentlist([pycbc-glue.segments.segment(-pycbc-glue.segments.infinity(), pycbc-glue.segments.infinity())])
             for xmldoc in xmldocs:
                 result &= find_segments(xmldoc, '%s:%s:%d' % (ifo, name, version), use_segment_table)
         elif operation == UNION:
-            result = glue.segments.segmentlist([])
+            result = pycbc-glue.segments.segmentlist([])
 
             for xmldoc in xmldocs:
                 result |= find_segments(xmldoc, '%s:%s:%d' % (ifo, name, version), use_segment_table)
@@ -158,13 +158,13 @@ def run_segment_operation(outdoc, filenames, segments, use_segment_table, operat
     keys = segments.split(',')
 
     if operation == INTERSECT:
-        sgmntlist = glue.segments.segmentlist([glue.segments.segment(-glue.segments.infinity(), glue.segments.infinity())])
+        sgmntlist = pycbc-glue.segments.segmentlist([pycbc-glue.segments.segment(-pycbc-glue.segments.infinity(), pycbc-glue.segments.infinity())])
 
         for key in keys:
             sgmntlist &= find_segments(indoc, key, use_segment_table)
 
     elif operation == UNION:
-        sgmntlist = glue.segments.segmentlist([])
+        sgmntlist = pycbc-glue.segments.segmentlist([])
 
         for key in keys:
             sgmntlist |= find_segments(indoc, key, use_segment_table)

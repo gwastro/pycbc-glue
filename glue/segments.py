@@ -38,7 +38,7 @@ infinity object used to define semi-infinite and infinite segments.
 
 See also:
 
-glue.segmentsUtils
+pycbc-glue.segmentsUtils
 """
 
 
@@ -47,7 +47,7 @@ from bisect import bisect_right as _bisect_right
 from copy import copy as _shallowcopy
 
 
-from glue import git_version
+from pycbc-glue import git_version
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"

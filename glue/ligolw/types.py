@@ -49,13 +49,13 @@ more than an order of magnitude.  If you wish to make a different choice
 for your files, for example if you wish your XML files to be lossless,
 simply include the lines
 
-	glue.ligolw.types.FormatFunc.update({
+	pycbc-glue.ligolw.types.FormatFunc.update({
 		"real_4": u"%.9g".__mod__,
 		"real_8": u"%.17g".__mod__,
 		"float": u"%.9g".__mod__,
 		"double": u"%.17g".__mod__,
-		u"complex_8": glue.ligolw.types.mk_complex_format_func(u"%.9g"),
-		u"complex_16": glue.ligolw.types.mk_complex_format_func(u"%.17g")
+		u"complex_8": pycbc-glue.ligolw.types.mk_complex_format_func(u"%.9g"),
+		u"complex_16": pycbc-glue.ligolw.types.mk_complex_format_func(u"%.17g")
 	})
 
 anywhere in your code, but before you write the document to a file.
@@ -69,7 +69,7 @@ References:
 import base64
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from . import ilwd
 
 
@@ -177,7 +177,7 @@ FormatFunc = {
 """
 Look-up table mapping LIGO Light-Weight XML data type strings to functions
 for formating Python data for output.  This table is used universally by
-glue.ligolw XML writing codes.
+pycbc-glue.ligolw XML writing codes.
 """
 
 
@@ -215,7 +215,7 @@ ToPyType = {
 """
 Look-up table mapping LIGO Light-Weight XML data type strings to functions
 for parsing Python data from input.  This table is used universally by
-glue.ligolw XML parsing codes.
+pycbc-glue.ligolw XML parsing codes.
 """
 
 
@@ -263,7 +263,7 @@ ToNumPyType = {
 }
 """
 Look-up table mapping LIGO Light-Weight XML data type strings to numpy
-array type strings.  Used by glue.ligolw array reading codes.
+array type strings.  Used by pycbc-glue.ligolw array reading codes.
 """
 
 
@@ -281,7 +281,7 @@ FromNumPyType = {
 }
 """
 Look-up table mapping numpy array type strings to LIGO Light-Weight XML
-data type strings.  Uesd by glue.ligolw array writing codes.
+data type strings.  Uesd by pycbc-glue.ligolw array writing codes.
 """
 
 

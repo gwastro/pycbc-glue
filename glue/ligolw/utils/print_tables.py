@@ -19,7 +19,7 @@ from .. import ligolw
 from .. import table
 
 __author__ = "Collin Capano <cdcapano@ligo.caltech.edu>"
-from glue import git_version
+from pycbc-glue import git_version
 __date__ = git_version.date
 __version__ = git_version.id
 

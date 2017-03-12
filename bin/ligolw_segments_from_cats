@@ -46,23 +46,23 @@ import os
 import pwd
 import tempfile
 import operator
-import glue.segments
+import pycbc-glue.segments
 
 import time
-from glue import gpstime
+from pycbc-glue import gpstime
 
-from glue.ligolw import ligolw
-from glue.ligolw import lsctables
-from glue.ligolw import utils
-from glue.ligolw.utils import ligolw_sqlite
-from glue.ligolw import dbtables
+from pycbc-glue.ligolw import ligolw
+from pycbc-glue.ligolw import lsctables
+from pycbc-glue.ligolw import utils
+from pycbc-glue.ligolw.utils import ligolw_sqlite
+from pycbc-glue.ligolw import dbtables
 
-from glue.segmentdb import query_engine
-from glue.segmentdb import segmentdb_utils
+from pycbc-glue.segmentdb import query_engine
+from pycbc-glue.segmentdb import segmentdb_utils
 
-from glue.ligolw.utils import process
+from pycbc-glue.ligolw.utils import process
 
-from glue import git_version
+from pycbc-glue import git_version
 
 import re
 import urllib
@@ -288,7 +288,7 @@ if __name__ == '__main__':
     if file_location:
         segmentdb_utils.ensure_segment_table(veto_connection)
     
-    cli_interval = glue.segments.segmentlist([glue.segments.segment(int(options.gps_start_time), int(options.gps_end_time))])
+    cli_interval = pycbc-glue.segments.segmentlist([pycbc-glue.segments.segment(int(options.gps_start_time), int(options.gps_end_time))])
             
     #
     # Get the set of veto categories and ifos for which we have segments 
@@ -331,7 +331,7 @@ if __name__ == '__main__':
                 if end_time == 0:
                     end_time = now
 
-                veto_interval  = glue.segments.segmentlist([glue.segments.segment(start_time, end_time)])
+                veto_interval  = pycbc-glue.segments.segmentlist([pycbc-glue.segments.segment(start_time, end_time)])
                 veto_interval.coalesce()
                 veto_interval &= cli_interval
 

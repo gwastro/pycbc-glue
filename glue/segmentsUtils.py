@@ -34,10 +34,10 @@ import itertools
 import re
 
 
-from glue import git_version
-from glue import iterutils
-from glue import lal
-from glue import segments
+from pycbc-glue import git_version
+from pycbc-glue import iterutils
+from pycbc-glue import lal
+from pycbc-glue import segments
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"
@@ -101,12 +101,12 @@ def fromlalcache(cachefile, coltype = int):
 
 	Example:
 
-	>>> from glue.lal import LIGOTimeGPS
+	>>> from pycbc-glue.lal import LIGOTimeGPS
 	>>> cache_seglists = fromlalcache(open(filename), coltype = LIGOTimeGPS).coalesce()
 
 	See also:
 
-	glue.lal.CacheEntry
+	pycbc-glue.lal.CacheEntry
 	"""
 	return segments.segmentlist(lal.CacheEntry(l, coltype = coltype).segment for l in cachefile)
 
@@ -229,7 +229,7 @@ def fromtama(file, coltype = lal.LIGOTimeGPS):
 def from_range_strings(ranges, boundtype = int):
 	"""
 	Parse a list of ranges expressed as strings in the form "value" or
-	"first:last" into an equivalent glue.segments.segmentlist.  In the
+	"first:last" into an equivalent pycbc-glue.segments.segmentlist.  In the
 	latter case, an empty string for "first" and(or) "last" indicates a
 	(semi)infinite range.  A typical use for this function is in
 	parsing command line options or entries in configuration files.
@@ -280,7 +280,7 @@ def to_range_strings(seglist):
 
 	Example:
 
-	>>> from glue.segments import *
+	>>> from pycbc-glue.segments import *
 	>>> segs = segmentlist([segment(0, 10), segment(35, 35), segment(100, infinity())])
 	>>> ",".join(to_range_strings(segs))
 	'0:10,35,100:'
@@ -318,7 +318,7 @@ def segmentlistdict_to_short_string(seglists):
 
 	Example:
 
-	>>> from glue.segments import *
+	>>> from pycbc-glue.segments import *
 	>>> segs = segmentlistdict({"H1": segmentlist([segment(0, 10), segment(35, 35), segment(100, infinity())]), "L1": segmentlist([segment(5, 15), segment(45, 60)])})
 	>>> segmentlistdict_to_short_string(segs)
 	'H1=0:10,35,100:/L1=5:15,45:60'
@@ -328,7 +328,7 @@ def segmentlistdict_to_short_string(seglists):
 	be encoded in command line options and config files.  For large
 	segmentlistdict objects or when multiple sets of segmentlists are
 	required, the LIGO Light Weight XML encoding available through the
-	glue.ligolw library should be used.
+	pycbc-glue.ligolw library should be used.
 	"""
 	return "/".join(["%s=%s" % (str(key), ",".join(to_range_strings(value))) for key, value in seglists.items()])
 
@@ -351,7 +351,7 @@ def segmentlistdict_from_short_string(s, boundtype = int):
 	be encoded in command line options and config files.  For large
 	segmentlistdict objects or when multiple sets of segmentlists are
 	required, the LIGO Light Weight XML encoding available through the
-	glue.ligolw library should be used.
+	pycbc-glue.ligolw library should be used.
 	"""
 	d = segments.segmentlistdict()
 	for token in s.strip().split("/"):
@@ -405,7 +405,7 @@ def S2playground(extent):
 
 	Example:
 
-	>>> from glue import segments
+	>>> from pycbc-glue import segments
 	>>> S2playground(segments.segment(874000000, 874010000))
 	[segment(874000013, 874000613), segment(874006383, 874006983)]
 	"""
@@ -426,7 +426,7 @@ def segmentlist_range(start, stop, period):
 
 	Example:
 
-	>>> from glue.segments import *
+	>>> from pycbc-glue.segments import *
 	>>> segmentlist(segmentlist_range(0, 15, 5))
 	[segment(0, 5), segment(5, 10), segment(10, 15)]
 	>>> segmentlist(segmentlist_range('', 'xxx', 'x'))
@@ -466,7 +466,7 @@ def Fold(seglist1, seglist2):
 
 	Example:
 
-	>>> from glue.segments import *
+	>>> from pycbc-glue.segments import *
 	>>> x = segmentlist([segment(0, 13), segment(14, 20), segment(22, 36)])
 	>>> for y in Fold(x, segmentlist_range(0, 48, 24)): print y
 	...
@@ -485,7 +485,7 @@ def vote(seglists, n):
 
 	Example:
 
-	>>> from glue.segments import *
+	>>> from pycbc-glue.segments import *
 	>>> w = segmentlist([segment(0, 15)])
 	>>> x = segmentlist([segment(5, 20)])
 	>>> y = segmentlist([segment(10, 25)])

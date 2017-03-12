@@ -21,7 +21,7 @@
 /*
  * ============================================================================
  *
- *                   glue.ligolw._ilwd Extension Module
+ *                   pycbc-glue.ligolw._ilwd Extension Module
  *
  * ============================================================================
  */
@@ -32,7 +32,7 @@
 #include <ilwd.h>
 
 
-#define MODULE_NAME "glue.ligolw._ilwd"
+#define MODULE_NAME "pycbc-glue.ligolw._ilwd"
 
 /* Gain access to 64-bit addressing where possible
  * http://www.python.org/dev/peps/pep-0353/#conversion-guidelines */

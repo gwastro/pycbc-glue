@@ -45,9 +45,9 @@ from xml.sax.xmlreader import AttributesImpl
 import warnings
 
 
-from glue import git_version
-from glue import offsetvector
-from glue import segments
+from pycbc-glue import git_version
+from pycbc-glue import offsetvector
+from pycbc-glue import segments
 from . import ilwd
 from . import ligolw
 from . import table
@@ -640,8 +640,8 @@ class DBTable(table.Table):
 	the use_in() function defined in this module for information on how
 	to create such a content handler
 
-	If a custom glue.ligolw.Table subclass is defined in
-	glue.ligolw.lsctables whose name matches the name of the DBTable
+	If a custom pycbc-glue.ligolw.Table subclass is defined in
+	pycbc-glue.ligolw.lsctables whose name matches the name of the DBTable
 	being constructed, the lsctables class is added to the list of
 	parent classes.  This allows the lsctables class' methods to be
 	used with the DBTable instances but not all of the methods will
@@ -695,7 +695,7 @@ class DBTable(table.Table):
 	def copy(self, *args, **kwargs):
 		"""
 		This method is not implemented.  See
-		glue.ligolw.table.Table for more information.
+		pycbc-glue.ligolw.table.Table for more information.
 		"""
 		raise NotImplemented
 
@@ -1011,7 +1011,7 @@ TableByName = {
 def use_in(ContentHandler):
 	"""
 	Modify ContentHandler, a sub-class of
-	glue.ligolw.LIGOLWContentHandler, to cause it to use the DBTable
+	pycbc-glue.ligolw.LIGOLWContentHandler, to cause it to use the DBTable
 	class defined in this module when parsing XML documents.  Instances
 	of the class must provide a connection attribute.  When a document
 	is parsed, the value of this attribute will be passed to the
@@ -1022,7 +1022,7 @@ def use_in(ContentHandler):
 	Example:
 
 	>>> import sqlite3
-	>>> from glue.ligolw import ligolw
+	>>> from pycbc-glue.ligolw import ligolw
 	>>> class MyContentHandler(ligolw.LIGOLWContentHandler):
 	...	def __init__(self, *args):
 	...		super(MyContentHandler, self).__init__(*args)

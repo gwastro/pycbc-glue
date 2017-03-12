@@ -38,10 +38,10 @@ functions, and methods shown below for more information.
 Example:
 
 >>> # import modules
->>> from glue.ligolw import ligolw
->>> from glue.ligolw import table
->>> from glue.ligolw import lsctables
->>> from glue.ligolw import utils as ligolw_utils
+>>> from pycbc-glue.ligolw import ligolw
+>>> from pycbc-glue.ligolw import table
+>>> from pycbc-glue.ligolw import lsctables
+>>> from pycbc-glue.ligolw import utils as ligolw_utils
 >>>
 >>> # define a content handler
 >>> class LIGOLWContentHandler(ligolw.LIGOLWContentHandler):
@@ -78,7 +78,7 @@ Example:
 """
 
 
-from glue import git_version
+from pycbc-glue import git_version
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"

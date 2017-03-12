@@ -34,7 +34,7 @@ import numpy
 import random
 
 
-from glue import git_version
+from pycbc-glue import git_version
 
 
 __author__ = "Kipp Cannon <kipp.cannon@ligo.org>"

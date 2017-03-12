@@ -29,7 +29,7 @@ A collection of utilities to assist with the use of coinc tables.
 """
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from .. import lsctables
 
 
@@ -50,7 +50,7 @@ __date__ = git_version.date
 def get_coinc_def_id(xmldoc, search, coinc_type, create_new = True, description = u""):
 	"""
 	Wrapper for the get_coinc_def_id() method of the CoincDefiner table
-	class in glue.ligolw.lsctables.  This wrapper will optionally
+	class in pycbc-glue.ligolw.lsctables.  This wrapper will optionally
 	create a new coinc_definer table in the document if one does not
 	already exist.
 	"""

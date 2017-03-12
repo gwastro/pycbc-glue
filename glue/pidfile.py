@@ -11,10 +11,10 @@ import errno
 import fcntl
 import time
 
-import glue.utils
+import pycbc-glue.utils
 
 
-# from glue import git_version
+# from pycbc-glue import git_version
 
 # __author__ = 'Peter Couvares <pfcouvar@syr.edu>'
 # __version__ = "git id %s" % git_version.id
@@ -47,7 +47,7 @@ def get_lock(lockfile):
     pidfile_pid = pidfile.readline().strip()
 
     if pidfile_pid.isdigit():
-        if glue.utils.pid_exists(int(pidfile_pid)):
+        if pycbc-glue.utils.pid_exists(int(pidfile_pid)):
             raise RuntimeError, ("pidfile %s contains pid (%s) of a running "
                                  "process" % (lockfile, pidfile_pid))
         else:

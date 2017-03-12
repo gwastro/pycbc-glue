@@ -21,11 +21,11 @@ import sys
 import os
 import re
 
-from glue.segments import segment, segmentlist
-from glue.ligolw import lsctables
-from glue.ligolw import table
-from glue.segmentdb import query_engine
-from glue.ligolw import types as ligolwtypes
+from pycbc-glue.segments import segment, segmentlist
+from pycbc-glue.ligolw import lsctables
+from pycbc-glue.ligolw import table
+from pycbc-glue.segmentdb import query_engine
+from pycbc-glue.ligolw import types as ligolwtypes
 
 
 
@@ -131,7 +131,7 @@ def setup_database(database_location):
       else:
          identity = None
       try:
-        from glue import LDBDWClient
+        from pycbc-glue import LDBDWClient
         client = LDBDWClient.LDBDClient(host,port,protocol,identity)
       except Exception, e:
         print >>sys.stderr, "Unable to connect to LDBD Server at %s://%s:%d " % (protocol,host, port) + str(e)
@@ -140,11 +140,11 @@ def setup_database(database_location):
     elif protocol.startswith('ldbd'):
       if protocol == "ldbd":
          identity += host
-         from glue import gsiserverutils
+         from pycbc-glue import gsiserverutils
       else:
          identity = None
       try:
-        from glue import LDBDClient
+        from pycbc-glue import LDBDClient
         client = LDBDClient.LDBDClient(host,port,identity)
       except Exception, e:
         print >>sys.stderr, "Unable to connect to LDBD Server at %s://%s:%d" % (protocol,host, port) + str(e)

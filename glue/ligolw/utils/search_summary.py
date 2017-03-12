@@ -30,7 +30,7 @@ search_summary table in LIGO Light-Weight XML documents.
 """
 
 
-from glue import git_version
+from pycbc-glue import git_version
 from .. import lsctables
 
 
