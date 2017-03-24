@@ -1,5 +1,5 @@
 # 
-# setup script for glue
+# setup script for pycbc_glue
 
 import os, sys, shutil
 import subprocess
@@ -45,7 +45,7 @@ class glue_install(install.install):
         if not os.path.exists(etcdirectory):
             os.makedirs(etcdirectory)
 
-        filename = os.path.join(etcdirectory, 'glue-user-env.sh')
+        filename = os.path.join(etcdirectory, 'pycbc_glue-user-env.sh')
         self.execute(write_file,
                      (filename, [self.extra_dirs]),
                      "creating %s" % filename)
@@ -66,12 +66,12 @@ class glue_install(install.install):
 
 def write_build_info():
     """
-    Get VCS info from glue/generate_vcs_info.py and add build information.
-    Substitute these into glue/git_version.py.in to produce
-    glue/git_version.py.
+    Get VCS info from pycbc_glue/generate_vcs_info.py and add build information.
+    Substitute these into pycbc_glue/git_version.py.in to produce
+    pycbc_glue/git_version.py.
     """
     date = branch = tag = author = committer = status = builder_name = build_date = ""
-    id = "1.0.dev2"
+    id = "1.1.0"
     
     try:
         v = gvcsi.generate_git_version_info()
@@ -106,7 +106,7 @@ def write_build_info():
 
     # FIXME: subprocess.check_call becomes available in Python 2.5
     sed_retcode = subprocess.call(sed_cmd,
-        stdout=open('glue/git_version.py', 'w'))
+        stdout=open('pycbc_glue/git_version.py', 'w'))
     if sed_retcode:
         raise gvcsi.GitInvocationError
     return id
@@ -115,36 +115,36 @@ ver = write_build_info()
 
 
 setup(
-  name = "pycbc-glue",
+  name = "pycbc-glue-obsolete",
   version = ver,
   author = "Duncan Brown",
   author_email = "duncan.brown@ligo.org",
   description = "Grid LSC User Engine",
   url = "https://github.com/ligo-cbc/pycbc-glue",
-  download_url = "https://github.com/ligo-cbc/pycbc-glue/archive/v0.9.8.tar.gz",
+  download_url = "https://github.com/ligo-cbc/pycbc-glue/archive/v1.1.0.tar.gz",
   license = 'See file LICENSE',
-  packages = [ 'glue', 'glue.ligolw', 'glue.ligolw.utils', 'glue.segmentdb', 'glue.auth'],
+  packages = [ 'pycbc_glue', 'pycbc_glue.ligolw', 'pycbc_glue.ligolw.utils', 'pycbc_glue.segmentdb', 'pycbc_glue.auth'],
   cmdclass = {'install' : glue_install,},
   ext_modules = [
     Extension(
-      "glue.ligolw.tokenizer",
+      "pycbc_glue.ligolw.tokenizer",
       [
-        "glue/ligolw/tokenizer.c",
-        "glue/ligolw/tokenizer.Tokenizer.c",
-        "glue/ligolw/tokenizer.RowBuilder.c",
-        "glue/ligolw/tokenizer.RowDumper.c"
+        "pycbc_glue/ligolw/tokenizer.c",
+        "pycbc_glue/ligolw/tokenizer.Tokenizer.c",
+        "pycbc_glue/ligolw/tokenizer.RowBuilder.c",
+        "pycbc_glue/ligolw/tokenizer.RowDumper.c"
       ],
-      include_dirs = [ "glue/ligolw" ]
+      include_dirs = [ "pycbc_glue/ligolw" ]
     ),
     Extension(
-      "glue.ligolw._ilwd",
+      "pycbc_glue.ligolw._ilwd",
       [
-        "glue/ligolw/ilwd.c"
+        "pycbc_glue/ligolw/ilwd.c"
       ],
-      include_dirs = [ "glue/ligolw" ]
+      include_dirs = [ "pycbc_glue/ligolw" ]
     ),
     Extension(
-      "glue.__segments",
+      "pycbc_glue.__segments",
       [
         "src/segments/segments.c",
         "src/segments/infinity.c",
@@ -155,7 +155,6 @@ setup(
     )
   ],
   scripts = [
-    os.path.join('bin','ligo_data_find'),
     os.path.join('bin','ligolw_add'),
     os.path.join('bin','ligolw_combine_segments'),
     os.path.join('bin','ligolw_cut'),
@@ -166,7 +165,6 @@ setup(
     os.path.join('bin','ligolw_segment_query'),
     os.path.join('bin','ligolw_segment_union'),
     os.path.join('bin','ligolw_segments_from_cats'),
-    os.path.join('bin','ligolw_sqlite'),
     os.path.join('bin','ligolw_diff'),
     ],
   data_files = [

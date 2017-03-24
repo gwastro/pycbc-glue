@@ -33,7 +33,7 @@
 #include <Python.h>
 
 
-#define MODULE_NAME "glue.__segments"
+#define MODULE_NAME "pycbc_glue.__segments"
 
 
 /*
