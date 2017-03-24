@@ -115,7 +115,7 @@ ver = write_build_info()
 
 
 setup(
-  name = "pycbc-glue",
+  name = "pycbc-glue-obsoleted",
   version = ver,
   author = "Duncan Brown",
   author_email = "duncan.brown@ligo.org",
