@@ -27,8 +27,8 @@ except:
   pass
 
 try:
-  from pycbc_glue import gpstime
-  from pycbc_glue import segments
+  from glue import gpstime
+  from glue import segments
 except ImportError:
   raise ImportError("Error, unable to import modules from pycbc_glue. Check that pycbc_glue is correctly installed and in your PYTHONPATH.")
 

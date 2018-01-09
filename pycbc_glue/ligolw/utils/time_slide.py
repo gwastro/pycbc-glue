@@ -25,7 +25,7 @@
 
 
 from pycbc_glue import git_version
-from pycbc_glue.text_progress_bar import ProgressBar
+from glue.text_progress_bar import ProgressBar
 from .. import lsctables
 
 

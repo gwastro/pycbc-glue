@@ -38,9 +38,9 @@ from xml import sax
 
 
 from pycbc_glue import git_version
-from pycbc_glue import iterutils
-from pycbc_glue import offsetvector
-from pycbc_glue import segments
+from glue import iterutils
+from glue import offsetvector
+from glue import segments
 from lal import LIGOTimeGPS
 
 from . import ligolw
