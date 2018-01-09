@@ -47,7 +47,7 @@ try:
 except ImportError:
 	# lal is optional
 	# FIXME:  make it not optional
-	from pycbc_glue import gpstime
+	from glue import gpstime
 	_UTCToGPS = lambda utc: int(gpstime.GpsSecondsFromPyUTC(time.mktime(utc)))
 
 

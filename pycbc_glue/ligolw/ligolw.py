@@ -616,7 +616,7 @@ class Time(Element):
 			try:
 				from lal import LIGOTimeGPS
 			except ImportError:
-				from pycbc_glue.lal import LIGOTimeGPS
+				from glue.lal import LIGOTimeGPS
 			# FIXME:  remove cast to string when lal swig
 			# can cast from unicode
 			self.pcdata = LIGOTimeGPS(str(self.pcdata))

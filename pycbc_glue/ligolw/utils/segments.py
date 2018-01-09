@@ -30,11 +30,11 @@ Ask Kipp to document this!
 
 
 from pycbc_glue import git_version
-from pycbc_glue import iterutils
-from pycbc_glue import segments
-from pycbc_glue import segmentsUtils
+from glue import iterutils
+from glue import segments
+from glue import segmentsUtils
 # FIXME:  switch to swig binding
-from pycbc_glue.lal import LIGOTimeGPS
+from glue.lal import LIGOTimeGPS
 from .. import lsctables
 
 

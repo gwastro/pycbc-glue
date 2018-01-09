@@ -123,7 +123,7 @@ setup(
   url = "https://github.com/ligo-cbc/pycbc-glue",
   download_url = "https://github.com/ligo-cbc/pycbc-glue/archive/v1.1.0.tar.gz",
   license = 'See file LICENSE',
-  packages = [ 'pycbc_glue', 'pycbc_glue.ligolw', 'pycbc_glue.ligolw.utils', 'pycbc_glue.segmentdb', 'pycbc_glue.auth'],
+  packages = [ 'pycbc_glue', 'pycbc_glue.ligolw', 'pycbc_glue.ligolw.utils'],
   cmdclass = {'install' : glue_install,},
   ext_modules = [
     Extension(
@@ -142,31 +142,9 @@ setup(
         "pycbc_glue/ligolw/ilwd.c"
       ],
       include_dirs = [ "pycbc_glue/ligolw" ]
-    ),
-    Extension(
-      "pycbc_glue.__segments",
-      [
-        "src/segments/segments.c",
-        "src/segments/infinity.c",
-        "src/segments/segment.c",
-        "src/segments/segmentlist.c"
-      ],
-      include_dirs = [ "src/segments" ]
     )
   ],
-  scripts = [
-    os.path.join('bin','ligolw_add'),
-    os.path.join('bin','ligolw_combine_segments'),
-    os.path.join('bin','ligolw_cut'),
-    os.path.join('bin','ligolw_print'),
-    os.path.join('bin','ligolw_print_tables'),
-    os.path.join('bin','ligolw_segment_diff'),
-    os.path.join('bin','ligolw_segment_intersect'),
-    os.path.join('bin','ligolw_segment_query'),
-    os.path.join('bin','ligolw_segment_union'),
-    os.path.join('bin','ligolw_segments_from_cats'),
-    os.path.join('bin','ligolw_diff'),
-    ],
+  scripts = [],
   data_files = [
     ( 'etc', [ 
         os.path.join('etc','ligolw.xsl'),

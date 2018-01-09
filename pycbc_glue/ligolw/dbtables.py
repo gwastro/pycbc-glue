@@ -46,8 +46,8 @@ import warnings
 
 
 from pycbc_glue import git_version
-from pycbc_glue import offsetvector
-from pycbc_glue import segments
+from glue import offsetvector
+from glue import segments
 from . import ilwd
 from . import ligolw
 from . import table
